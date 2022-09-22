@@ -17,7 +17,7 @@ def solution(q1, q2):
     #bfs로 while 돌리자
     s1 = sum(q1)
     s2 = sum(q2)
-    limit = 3*len(q1)
+    limit = 2*len(q1+q2)
     while s1 != s2:
         if s1 > s2:
             tmp = q1.popleft()
