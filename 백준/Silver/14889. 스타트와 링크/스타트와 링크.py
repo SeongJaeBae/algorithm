@@ -5,6 +5,29 @@ def main():
     [arr.append(list(map(int,input().split(" "))) ) for i in range(0,n)]
     
     case = itertools.combinations(range(n),int(n/2))
+    answer = 100
+    total = list(range(n))
+
+    for c in case:
+        l = list(set(total) - set(c))
+        tmp1 =0
+        tmp2 =0
+        for i,j in list(itertools.combinations(c, 2)):
+            tmp1+= arr[i][j]
+            tmp1+= arr[j][i]
+        for i,j in list(itertools.combinations(l,2)):
+            tmp2+= arr[i][j]
+            tmp2+= arr[j][i]
+        answer = min(answer,abs(tmp1-tmp2))
+    print(answer)
+
+"""
+def main():
+    n = int(input())
+    arr = []
+    [arr.append(list(map(int,input().split(" "))) ) for i in range(0,n)]
+    
+    case = itertools.combinations(range(n),int(n/2))
     min = 100
     for c in case:
         tmp1 =0
@@ -29,8 +52,7 @@ def main():
         if min > tmp_min:
             min = tmp_min
     print(min)
-    return min
-
+    return min"""
     
    
 
