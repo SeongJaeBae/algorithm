@@ -9,19 +9,19 @@ def solution(maps):
     
     def bfs(x,y,end):
         q = []
-        visited = [[-1]*m for _ in range(n)]
-        visited[x][y] = 0
+        visited = [[0]*m for _ in range(n)]
+        visited[x][y] = 1
         q.append((x,y))
         while(len(q)>0):
             x, y = q.pop(0)
             print(x,y)
             if maps[x][y] == end:
-                return [visited[x][y],x,y]
+                return [visited[x][y]-1,x,y]
             for i in range(4):
                 nx = x + dx[i]
                 ny = y + dy[i]
                 if 0 <= nx < len(maps) and 0 <= ny < len(maps[0]):
-                    if visited[nx][ny] == -1:
+                    if visited[nx][ny] == 0:
                         if maps[nx][ny] != 'X':
                             q.append([nx,ny])
                             visited[nx][ny] = visited[x][y] + 1
