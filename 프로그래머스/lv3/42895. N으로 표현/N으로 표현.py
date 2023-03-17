@@ -3,7 +3,7 @@ def solution(N, number):
         return 1
     set_list = []
     
-    for cnt in range(1, 9): # 1개부터 8개까지 확인
+    for cnt in range(1, 10): # 1개부터 8개까지 확인
         partial_set = set()
         partial_set.add(int(str(N) * cnt)) # 이어 붙여서 만드는 경우 넣기
         for i in range(cnt - 1): # (1, n-1) 부터 (n-1, 1)까지 사칙연산
