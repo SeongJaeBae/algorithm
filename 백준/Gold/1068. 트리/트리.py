@@ -1,26 +1,30 @@
+from collections import defaultdict
 import sys
 input = sys.stdin.readline
-from collections import defaultdict
 
 n = int(input())
-li = list(map(int,input().split()))
-m = int(input())
-d = defaultdict(list)
+s = list(map(int,input().split()))
+target = int(input())
 
-for i in range(n):
-    if i == m:
+#트리 구조 만들기
+tree = defaultdict(list)
+for i in range(0,n):
+    if i == target :
         continue
-    d[li[i]].append(i)
+    tree[s[i]].append(i)
 
-def dfs(index):
-    if d[index] == []:
+#리프 노드 개수 세기
+def count_leaf(idx):
+    if tree[idx] == []:
         return 1
-    num = 0
-    for i in d[index]:
-        num += dfs(i)
-    return num
+    tmp_sum = 0
+    for i in tree[idx]:
+        tmp_sum += count_leaf(i)
+    return tmp_sum
 
-if d[-1]==[]:
+#루트 안주는 경우 시부럴
+if tree[-1] == []:
     print(0)
 else:
-    print(dfs(-1))
+    print(count_leaf(-1))
+
