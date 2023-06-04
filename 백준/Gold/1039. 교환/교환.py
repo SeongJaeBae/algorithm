@@ -1,34 +1,22 @@
-from sys import stdin
-from collections import deque
-input = stdin.readline
+if __name__ == '__main__':
+    N, K = input().split()
+    if len(N) == 1 or (len(N) == 2 and N[1] == '0'):
+        print(-1)
+        exit()
+    K = int(K)
+    q = [N]
+    n = len(N)
 
-answer = 0
-n,k= map(int,input().split())
-M = len(str(n))
-def bfs(N, K):
-    visited = set()
-    visited.add((N, 0))
-    q = deque()
-    q.append((N, 0))
-    answer = 0
-    while q:
-        n, k = q.popleft()
-        if k == K:
-            answer = max(answer, n)
-            continue
-        n = list(str(n))
-        for i in range(M-1):
-            for j in range(i+1, M):
-                if i == 0 and n[j] == '0':
-                    continue
-                n[i], n[j] = n[j], n[i]
-                nn = int(''.join(n))
-                if (nn, k+1) not in visited:
-                    q.append((nn, k+1))
-                    visited.add((nn, k+1))
-                n[i], n[j] = n[j], n[i]
-    return answer if answer else -1
-
-
-print(bfs(n, k))
-    
+    for _ in range(K):
+        tmp = set()
+        for s in q:
+            cur = list(s)
+            for i in range(n-1):
+                for j in range(i+1, n):
+                    if not i and cur[j] == '0':
+                        continue
+                    cur[i], cur[j] = cur[j], cur[i]
+                    tmp.add(''.join(cur))
+                    cur[i], cur[j] = cur[j], cur[i]
+        q = tmp
+    print(max(map(int, q)))
